@@ -1,0 +1,15 @@
+{
+  "name": "webpack-twig-loader",
+  "version": "0.0.1",
+  "description": "A twig.js loader for webpack",
+  "main": "index.js",
+  "keywords": [
+    "webpack",
+    "twig",
+    "twigjs",
+    "loader",
+    "webpack-loader"
+  ],
+  "author": "Emil Nordh <me@emilnordh.se>",
+  "license": "ISC"
+}
