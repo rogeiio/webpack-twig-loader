@@ -11,5 +11,9 @@
     "webpack-loader"
   ],
   "author": "Emil Nordh <me@emilnordh.se>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "loader-utils": "^0.2.4",
+    "twig": "^0.7.2"
+  }
 }
