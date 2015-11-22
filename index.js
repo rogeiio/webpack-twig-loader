@@ -1,14 +1,23 @@
 var utils = require("loader-utils"),
-
-	twig = require('twig').twig;
+    twig = require('twig').twig;
 
 module.exports = function(content) {
+    var id = this.resource, matches, tpl;
 
-	var id = this.resource;
+    this.cacheable();
 
-	var tpl = twig({ id: id, data: content })
-		.compile({ module: 'node' });
+    if (!id) {
+        throw new Error('File name cannot be empty.');
+    }
 
-	return 'module.exports = ' + tpl.match(/(?:twig\()(.*)(?:\))/m)[1] + ';';
+    matches = id.match(/([^/\?#]+).*$/);
 
+    if (matches === null) {
+        throw new Error('File name is not valid "' + id + '"');
+    }
+
+    id = matches.length ? matches[1] : id;
+    twig({ id: id, data: content }).compile({ module: 'node' });
+
+    return 'module.exports = ' + tpl.match(/(?:twig\()(.*)(?:\))/m)[1] + ';';
 }
