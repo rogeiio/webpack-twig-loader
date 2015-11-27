@@ -10,7 +10,7 @@ module.exports = function(content) {
         throw new Error('File name cannot be empty.');
     }
 
-    matches = id.match(/([^/\?#]+).*$/);
+    matches = id.match(/([^\/]+$)/);
 
     if (matches === null) {
         throw new Error('File name is not valid "' + id + '"');
