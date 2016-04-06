@@ -2,7 +2,7 @@ var utils = require("loader-utils"),
     twig = require('twig').twig;
 
 module.exports = function(content) {
-    var id = this.resource, matches, tpl;
+    var id = this.resource, matches, template, compiled;
 
     this.cacheable();
 
@@ -17,7 +17,13 @@ module.exports = function(content) {
     }
 
     id = matches.length ? matches[1] : id;
-    tpl = twig({ id: id, data: content }).compile({ module: 'node' });
 
-    return 'module.exports = ' + tpl.match(/(?:twig\()(.*)(?:\))/m)[1] + ';';
+    // Checking for cached template
+    template = twig({ ref: id });
+    if (template === null) {
+        template = twig({ id: id, data: content });
+    }
+
+    compiled = template.compile({ module: 'node' });
+    return 'module.exports = ' + compiled.match(/(?:twig\()(.*)(?:\))/m)[1] + ';';
 }
