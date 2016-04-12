@@ -1,8 +1,8 @@
 var utils = require("loader-utils"),
-    twig = require('twig').twig;
+    Twig = require('twig');
 
 module.exports = function(content) {
-    var id = this.resource, matches, template, compiled;
+    var id = this.resource, matches, template, compiled, query, isCacheEnabled = false;
 
     this.cacheable();
 
@@ -18,10 +18,23 @@ module.exports = function(content) {
 
     id = matches.length ? matches[1] : id;
 
+    if (this.query) {
+        // this.query comes in the following format: ?{"enablecache":false}
+        query = JSON.parse(this.query.slice(1));
+        isCacheEnabled = query.enablecache;
+    }
+
     // Checking for cached template
-    template = twig({ ref: id });
+    template = Twig.twig({ ref: id });
     if (template === null) {
-        template = twig({ id: id, data: content });
+        template = Twig.twig({ id: id, data: content });
+    }
+
+    // Removing the template from cache
+    if (!isCacheEnabled) {
+        Twig.extend(function(Twig) {
+            delete Twig.Templates.registry[id];
+        });
     }
 
     compiled = template.compile({ module: 'node' });
