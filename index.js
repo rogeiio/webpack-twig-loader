@@ -25,9 +25,9 @@ module.exports = function(content) {
     }
 
     // Checking for cached template
-    template = Twig.twig({ ref: id });
+    template = Twig.twig({ ref: id, rethrow: true });
     if (template === null) {
-        template = Twig.twig({ id: id, data: content });
+        template = Twig.twig({ id: id, data: content, rethrow: true });
     }
 
     // Removing the template from cache
