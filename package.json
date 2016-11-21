@@ -10,11 +10,12 @@
     "loader",
     "webpack-loader"
   ],
-  "author": "Emil Nordh <me@emilnordh.se>",
-  "license": "ISC",
+  "author": "Artem Petrov <artem.petrov@opticsplanet.com>",
+  "license": "MIT",
+
   "dependencies": {
     "loader-utils": "^0.2.4",
-    "twig": "0.8.2"
+    "twig": "^0.8"
   },
   "repository": "ecentria/webpack-twig-loader"
 }
