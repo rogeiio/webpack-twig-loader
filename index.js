@@ -1,5 +1,4 @@
-var utils = require("loader-utils"),
-    Twig = require('twig');
+var Twig = require('twig');
 
 module.exports = function(content) {
     var id = this.resource, matches, template, compiled, query, isCacheEnabled = false;
@@ -39,4 +38,4 @@ module.exports = function(content) {
 
     compiled = template.compile({ module: 'node' });
     return 'module.exports = ' + compiled.match(/(?:twig\()(.*)(?:\))/m)[1] + ';';
-}
+};
