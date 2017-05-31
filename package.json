@@ -1,6 +1,6 @@
 {
   "name": "webpack-twig-loader",
-  "version": "0.0.10",
+  "version": "0.0.9",
   "description": "A twig.js loader for webpack",
   "main": "index.js",
   "keywords": [
