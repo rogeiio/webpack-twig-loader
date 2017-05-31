@@ -21,7 +21,7 @@ module.exports = function(content) {
         // in webpack v2, this.query comes in the following format: { enablecache: false }
         if (typeof(this.query.enablecache) === 'boolean') {
             isCacheEnabled = this.query.enablecache;
-        } else {
+        } else if (typeof(this.query) === 'string') {
             // in webpack v1, this.query comes in the following format: ?{"enablecache":false}
             query = JSON.parse(this.query.slice(1));
             isCacheEnabled = query.enablecache;
