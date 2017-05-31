@@ -18,9 +18,14 @@ module.exports = function(content) {
     id = matches.length ? matches[1] : id;
 
     if (this.query) {
-        // this.query comes in the following format: ?{"enablecache":false}
-        query = JSON.parse(this.query.slice(1));
-        isCacheEnabled = query.enablecache;
+        // in webpack v2, this.query comes in the following format: { enablecache: false }
+        if (typeof(this.query.enablecache) === 'boolean') {
+            isCacheEnabled = this.query.enablecache;
+        } else {
+            // in webpack v1, this.query comes in the following format: ?{"enablecache":false}
+            query = JSON.parse(this.query.slice(1));
+            isCacheEnabled = query.enablecache;
+        }
     }
 
     // Checking for cached template
